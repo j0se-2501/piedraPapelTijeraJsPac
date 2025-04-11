@@ -140,9 +140,6 @@ function iniciarPartida(){
         botonYa.removeAttribute("disabled");
         botonReset.removeAttribute("disabled");
     }
-    else{
-        reiniciarImagenes();
-    }
 }
 
 botonJugar.onclick = function () {
