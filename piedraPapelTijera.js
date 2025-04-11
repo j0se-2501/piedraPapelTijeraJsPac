@@ -87,7 +87,8 @@ function comprobarNombreLegal(nombreUser) {
 }
 
 function comprobarNumeroPartidas(numeroPartidas) {
-    numeroPartidas.value = parseInt(numeroPartidas.value);
+    numeroPartidas.value = parseInt(numeroPartidas.value);//paso a entero posibles decimales; 
+    // lo hago antes de comprobar si es mayor que cero para que no aceptes valores de 0coma
     if (numeroPartidas.value > 0) {
         quitarFondoRojo(numeroPartidas);
         return true;
