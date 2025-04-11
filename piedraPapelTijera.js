@@ -87,6 +87,7 @@ function comprobarNombreLegal(nombreUser) {
 }
 
 function comprobarNumeroPartidas(numeroPartidas) {
+    numeroPartidas.value = parseInt(numeroPartidas.value);
     if (numeroPartidas.value > 0) {
         quitarFondoRojo(numeroPartidas);
         return true;
