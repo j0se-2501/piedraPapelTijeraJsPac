@@ -63,6 +63,7 @@ function reiniciarImagenes() {
         imagenes[i].src= "img/defecto.png";
         imagenes[i].onclick = null;
     }
+    CPUImg.src= "img/defecto.png";
 }
 
 function annadirFondoRojo(elementoDOM) {
@@ -97,9 +98,18 @@ function comprobarNumeroPartidas(numeroPartidas) {
 }
 
 function deshabilitarInputsPartida(boolean) {
+    if (boolean){
     user.setAttribute("disabled", boolean);
+    console.log(document.getElementsByName("nombre")[0]);
     numeroPartidas.setAttribute("disabled", boolean);
     botonJugar.setAttribute("disabled", boolean);
+    }
+    else{
+    user.removeAttribute("disabled");
+    console.log(document.getElementsByName("nombre")[0]);
+    numeroPartidas.removeAttribute("disabled");
+    botonJugar.removeAttribute("disabled");
+    }    
 }
 
 function cambiarValorSpan (span, valor){
@@ -127,6 +137,8 @@ function iniciarPartida(){
         //spanPartidasTotales.innerHTML=numeroPartidas.value;
         cambiarValorSpan(spanPartidaActual, ++contadorPartidas);
         //spanPartidaActual.innerHTML=++contadorPartidas;
+        botonYa.removeAttribute("disabled");
+        botonReset.removeAttribute("disabled");
     }
     else{
         reiniciarImagenes();
@@ -187,11 +199,36 @@ function anunciarResultadoPartida(resultado){
 
 botonYa.onclick = function() {
     user = document.getElementsByName("nombre")[0];
-    if (user.getAttribute("disabled")) { 
+    console.log(contadorPartidas);
+    console.log(numeroPartidas.value);
+    if (user.getAttribute("disabled")&&contadorPartidas<=numeroPartidas.value) { 
     generarAleatoriamenteTiradaCPU();
-    cambiarValorSpan(spanPartidaActual, ++contadorPartidas);
     resultadoPartida=comprobarResultadoPartida();
     anunciarResultadoPartida(resultadoPartida);
+    if (contadorPartidas!=numeroPartidas.value){
+        cambiarValorSpan(spanPartidaActual, ++contadorPartidas);
+    } else{
+        botonYa.setAttribute("disabled", true);
+    } 
     }
+    else if (user.getAttribute("disabled")&&contadorPartidas>numeroPartidas.value){
+        botonYa.setAttribute("disabled", true);
+    }
+}
+
+botonReset.onclick = function(){
+    user = document.getElementsByName("nombre")[0];
+    if (user.getAttribute("disabled")) {
+        console.log(document.getElementsByName("nombre")[0]);
+        deshabilitarInputsPartida(false);
+        reiniciarImagenes();
+        asignarImagenes();
+        contadorPartidas=0;
+        numeroPartidas.value=0;
+        cambiarValorSpan(spanPartidaActual, contadorPartidas);
+        cambiarValorSpan(spanPartidasTotales, numeroPartidas.value);
+        botonReset.setAttribute("disabled", true);
+        historialPartidas.innerHTML="<li>Nueva partida.</li>"+historialPartidas.innerHTML;
+        }
 }
 
