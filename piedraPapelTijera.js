@@ -227,6 +227,7 @@ botonReset.onclick = function(){
         numeroPartidas.value=0;
         cambiarValorSpan(spanPartidaActual, contadorPartidas);
         cambiarValorSpan(spanPartidasTotales, numeroPartidas.value);
+        botonYa.setAttribute("disabled", true);
         botonReset.setAttribute("disabled", true);
         historialPartidas.innerHTML="<li>Nueva partida.</li>"+historialPartidas.innerHTML;
         }
