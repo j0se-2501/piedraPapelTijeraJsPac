@@ -76,8 +76,7 @@ function quitarFondoRojo(elementoDOM) {
 }
 
 function deshabilitarInputsPartida(boolean) { //elementos que se deshabilitan al pulsar jugar; los botones reset y ya se deshabilitan aparte
-    if (boolean){ //el boolean creo que no es necesario en cuanto que siempre va a ser true; entendí posteriormente que para borrar el atributo
-                //es con removeAttribute y no pasando el argumento false al setAttribute
+    if (boolean){           
     user.setAttribute("disabled", boolean);
     console.log(document.getElementsByName("nombre")[0]);
     numeroPartidas.setAttribute("disabled", boolean);
